@@ -1,1 +1,5 @@
-# Financial Analysis & Personalized Web-Search 
+# Financial Analysis & Personalized Web-Search -- AI Agent
+
+## Tools:
+###Platforms
+Phidata 
