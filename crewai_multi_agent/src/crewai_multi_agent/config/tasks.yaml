@@ -1,0 +1,515 @@
+planning_task:
+  description: >
+    Develop a comprehensive Amazon product launch campaign strategy for {product_category}.
+    
+    Your responsibilities:
+    1. Define clear campaign objectives (visibility, conversion, review acquisition)
+    2. Identify target audience demographics and psychographics
+    3. Create 2-3 detailed buyer personas with names, ages, pain points, and motivations
+    4. Establish campaign timeline and key milestones
+    5. Set success metrics (target ranking, review count, conversion rate)
+    6. Outline brand voice and messaging guidelines
+    7. Coordinate task delegation to specialized agents
+    
+    Consider the current date ({current_date}) and seasonal trends when planning timeline.
+    Focus on {product_name} in the {product_category} category.
+    
+    Provide a structured campaign brief that will guide all subsequent agent activities.
+  expected_output: >
+    A detailed campaign strategy document in Markdown format including:
+    - Executive Summary with campaign goals
+    - 2-3 Buyer Personas (name, demographics, pain points, shopping behavior)
+    - Campaign Timeline with key dates and milestones
+    - Brand Voice Guidelines (tone, style, key messages)
+    - Success Metrics and KPIs
+    - Task Delegation Overview
+    
+    Format with clear headers and bullet points for easy reference by other agents.
+  agent: lead_planner
+
+market_research_task:
+  description: >
+    Conduct comprehensive market research for {product_category} on Amazon marketplace.
+    
+    Use the Web Search Tool to gather intelligence on:
+    1. Top competing products in {product_category} (features, pricing, ratings, review counts)
+    2. Market trends and growth patterns in this category
+    3. Customer review analysis (common praise, complaints, feature requests)
+    4. Pricing strategies and competitive landscape
+    5. Target demographic insights and shopping behaviors
+    6. Seasonal demand patterns and purchase triggers
+    
+    Use the Data Analysis Tool with analysis_type='trends' to identify market opportunities.
+    Synthesize findings into actionable insights for product positioning.
+    
+    Focus on {product_name} and how it can differentiate in the market.
+  expected_output: >
+    A comprehensive market research report in Markdown format containing:
+    
+    ## Market Overview
+    - Category size, growth rate, and trends
+    - Key players and market share distribution
+    
+    ## Competitive Analysis
+    - Top 5 competing products with features, pricing, and ratings
+    - Competitive advantages and weaknesses
+    - Market gaps and opportunities
+    
+    ## Customer Insights
+    - Demographics and psychographics of target buyers
+    - Common pain points and needs (from review analysis)
+    - Purchase decision factors and objections
+    
+    ## Strategic Recommendations
+    - Optimal pricing strategy
+    - Key features to emphasize
+    - Differentiation opportunities
+    
+    Include specific data points, statistics, and examples from research.
+  agent: market_researcher
+
+seo_research_task:
+  description: >
+    Perform comprehensive SEO keyword research and optimization strategy for {product_category}.
+    
+    Use the SEO Keyword Research Tool to:
+    1. Identify primary high-volume keywords related to {product_name} and {product_category}
+    2. Find long-tail keyword opportunities with lower competition
+    3. Discover trending and seasonal keywords
+    4. Analyze competitor keyword strategies
+    5. Research voice search and question-based queries
+    
+    Consider Amazon's A9 algorithm ranking factors:
+    - Keyword relevance in title, bullets, description
+    - Sales velocity and conversion rate
+    - Customer reviews and ratings
+    - Backend search terms optimization
+    
+    Develop a complete keyword strategy for all content elements (title, bullets, description, backend).
+  expected_output: >
+    A detailed SEO keyword strategy document in Markdown format including:
+    
+    ## Primary Keywords
+    - 5-10 high-volume, high-relevance keywords with search volumes
+    
+    ## Long-Tail Keywords  
+    - 10-15 specific long-tail phrases for targeted traffic
+    
+    ## Trending & Seasonal Keywords
+    - 5-8 emerging keywords with growth metrics
+    
+    ## Keyword Placement Strategy
+    - Title: Top 3 keywords to include
+    - Bullet Points: Keywords for each bullet (5 bullets)
+    - Description: Secondary and long-tail keywords
+    - Backend Search Terms: Additional keywords (250 character strategy)
+    
+    ## Competitor Keyword Analysis
+    - Keywords competitors are ranking for
+    - Gaps and opportunities
+    
+    Provide specific recommendations for integrating keywords naturally into content.
+  agent: seo_specialist
+
+copywriting_task:
+  description: >
+    Create compelling, conversion-optimized copy for {product_name} in {product_category} category.
+    
+    Based on the market research insights, buyer personas, and SEO keywords provided, craft:
+    
+    1. **Product Title** (200 characters max)
+       - Include primary keywords naturally
+       - Highlight key features and benefits
+       - Follow Amazon title guidelines
+    
+    2. **Bullet Points** (5 bullets, 250 characters each)
+       - Lead with benefits, support with features
+       - Address customer pain points
+       - Incorporate SEO keywords naturally
+       - Use power words and emotional triggers
+    
+    3. **Product Description** (2000 characters)
+       - Tell compelling product story
+       - Address objections and build trust
+       - Include social proof elements
+       - Weave in long-tail keywords
+    
+    4. **Campaign Slogans** (5-7 options)
+       - Memorable, brand-aligned taglines
+       - Emphasize unique value proposition
+    
+    5. **Ad Headlines** (10 variations for testing)
+       - Attention-grabbing, benefit-focused
+       - Include urgency or social proof
+    
+    Ensure all copy aligns with brand voice guidelines from the planning document.
+    Write in a persuasive, customer-centric style that drives conversions.
+  expected_output: >
+    A comprehensive copywriting deliverable in Markdown format:
+    
+    # {product_name} - Amazon Listing Copy
+    
+    ## Product Title
+    [200-character optimized title]
+    
+    ## Bullet Points
+    1. [Bullet 1 - Lead benefit]
+    2. [Bullet 2 - Key feature/benefit]
+    3. [Bullet 3 - Problem solution]
+    4. [Bullet 4 - Quality/trust element]
+    5. [Bullet 5 - Bonus/guarantee]
+    
+    ## Product Description
+    [Engaging 2000-character description with story, benefits, and keywords]
+    
+    ## Campaign Slogans
+    - [Slogan 1]
+    - [Slogan 2]
+    - [5-7 total options]
+    
+    ## Ad Headlines (A/B Testing Variations)
+    1. [Headline 1]
+    2. [Headline 2]
+    [10 total variations]
+    
+    ## Key Messaging Points
+    - [Core messages to emphasize across all touchpoints]
+    
+    All copy should be ready to use with minimal editing, professionally written, and conversion-optimized.
+  agent: copywriter
+  context:
+    - planning_task
+    - market_research_task
+    - seo_research_task
+
+social_media_task:
+  description: >
+    Develop a comprehensive social media marketing campaign for {product_name} launch.
+    
+    Create platform-specific content for:
+    
+    1. **Facebook** (2-3 ad copy variations + 3 organic posts)
+       - Target audience: 25-55 years old
+       - Focus on detailed benefits, trust signals, customer reviews
+       - Include call-to-action and urgency elements
+    
+    2. **Instagram** (3-4 post captions + 2 Story scripts + hashtag strategy)
+       - Target audience: 18-45 years old
+       - Visual-first storytelling, lifestyle integration
+       - 20-30 relevant hashtags organized by priority
+    
+    3. **TikTok** (2-3 video concept scripts)
+       - Target audience: 18-35 years old
+       - Trend-aligned, entertaining, authentic
+       - Hook-content-CTA structure
+    
+    4. **Twitter/X** (5-7 tweets for launch sequence)
+       - Concise, engaging, shareable
+       - Mix of product features, benefits, and social proof
+    
+    5. **Influencer Partnership Brief**
+       - Target influencer profile (follower count, niche, engagement rate)
+       - Talking points and key messages
+       - Campaign hashtags and disclosure requirements
+    
+    All content should align with platform best practices, brand voice, and campaign objectives.
+    Incorporate insights from market research and SEO keywords where appropriate.
+  expected_output: >
+    A complete social media campaign playbook in Markdown format:
+    
+    # Social Media Campaign: {product_name}
+    
+    ## Facebook Campaign
+    ### Paid Ads
+    - Ad Copy Variation 1: [Detailed benefit-focused ad]
+    - Ad Copy Variation 2: [Social proof-focused ad]
+    - Ad Copy Variation 3: [Urgency/scarcity-focused ad]
+    
+    ### Organic Posts
+    - Post 1: [Launch announcement]
+    - Post 2: [Feature highlight]
+    - Post 3: [Customer testimonial/use case]
+    
+    ## Instagram Campaign  
+    ### Feed Posts
+    - Caption 1: [Launch post with storytelling]
+    - Caption 2: [Behind-the-scenes/brand story]
+    - Caption 3: [User benefit showcase]
+    - Caption 4: [Limited-time offer]
+    
+    ### Stories
+    - Story 1: [Swipe-up product demo script]
+    - Story 2: [Poll/engagement Story]
+    
+    ### Hashtag Strategy
+    **High Priority (100K-500K):** #hashtag1 #hashtag2...
+    **Medium Priority (10K-100K):** #hashtag3 #hashtag4...
+    **Niche (1K-10K):** #hashtag5 #hashtag6...
+    
+    ## TikTok Campaign
+    - Video Concept 1: [Hook, content, CTA script]
+    - Video Concept 2: [Trend integration script]
+    - Video Concept 3: [User UGC encouragement]
+    
+    ## Twitter Campaign
+    - Tweet 1: [Teaser tweet]
+    - Tweet 2-7: [Launch sequence with varied angles]
+    
+    ## Influencer Partnership Brief
+    - **Profile:** [Ideal influencer criteria]
+    - **Key Messages:** [What to emphasize]
+    - **Campaign Hashtags:** #branded #hashtags
+    - **FTC Compliance:** [Disclosure requirements]
+    
+    Include posting schedule recommendations and engagement strategies.
+  agent: social_media_marketer
+  context:
+    - planning_task
+    - market_research_task
+    - seo_research_task
+
+validation_task:
+  description: >
+    Perform comprehensive quality assurance review of all campaign materials for {product_name}.
+    
+    Review and validate:
+    
+    1. **Campaign Strategy Alignment**
+       - Do all materials support campaign objectives?
+       - Is brand voice consistent across deliverables?
+       - Are buyer personas properly targeted?
+    
+    2. **Amazon Listing Copy Review**
+       - Title: Character count, keyword placement, clarity
+       - Bullets: Benefit-driven, compelling, compliant with Amazon guidelines
+       - Description: Engaging, persuasive, keyword-optimized
+       - Check for prohibited claims, grammatical errors, formatting issues
+    
+    3. **SEO Keyword Integration**
+       - Are primary keywords naturally integrated?
+       - Is keyword density appropriate (not stuffing)?
+       - Are long-tail keywords used effectively?
+    
+    4. **Social Media Content Review**
+       - Platform-appropriate tone and format
+       - CTA clarity and effectiveness
+       - Hashtag relevance and quality
+       - FTC compliance for influencer content
+    
+    5. **Compliance & Best Practices**
+       - Amazon content policy compliance
+       - No superlative claims without substantiation
+       - Accurate product information
+       - Professional tone and grammar
+    
+    6. **Overall Campaign Cohesion**
+       - Do all pieces work together?
+       - Is messaging consistent?
+       - Any gaps or redundancies?
+    
+    Provide constructive feedback with specific recommendations for improvements.
+    Approve elements that meet quality standards.
+  expected_output: >
+    A comprehensive validation report in Markdown format:
+    
+    # Campaign Quality Assurance Report: {product_name}
+    
+    ## Executive Summary
+    - Overall Assessment: [APPROVED / APPROVED WITH MINOR REVISIONS / NEEDS REVISION]
+    - Key Strengths: [3-5 strong points]
+    - Critical Issues: [Any must-fix items]
+    
+    ## Detailed Review
+    
+    ### Campaign Strategy ✓/✗
+    - Objective Alignment: [Assessment]
+    - Brand Consistency: [Assessment]
+    - Persona Targeting: [Assessment]
+    
+    ### Amazon Listing Copy ✓/✗
+    - Product Title: [Review with character count, suggestions]
+    - Bullet Points: [Review each bullet, flag issues]
+    - Description: [Content quality, keyword integration, compliance]
+    
+    ### SEO Strategy ✓/✗
+    - Keyword Selection: [Quality assessment]
+    - Integration Quality: [Natural vs. forced]
+    - Optimization Opportunities: [Additional suggestions]
+    
+    ### Social Media Content ✓/✗
+    - Facebook: [Platform-specific review]
+    - Instagram: [Platform-specific review]
+    - TikTok: [Platform-specific review]
+    - Twitter: [Platform-specific review]
+    
+    ### Compliance Check ✓/✗
+    - Amazon Policy Compliance: [Pass/Fail with specifics]
+    - FTC Guidelines: [Disclosure requirements met?]
+    - Accuracy Verification: [Claims substantiation]
+    
+    ## Recommendations
+    
+    ### Critical Fixes (Must Address)
+    1. [Issue and specific fix]
+    2. [Issue and specific fix]
+    
+    ### Suggested Improvements (Optional)
+    1. [Enhancement opportunity]
+    2. [Enhancement opportunity]
+    
+    ### Best Practices Applied
+    - [Highlight excellent executions]
+    
+    ## Final Approval Status
+    [APPROVED FOR LAUNCH / REQUIRES REVISION / READY AFTER MINOR EDITS]
+    
+    Campaign is [ready/not ready] for implementation.
+  agent: critic_validator
+  context:
+    - planning_task
+    - market_research_task
+    - seo_research_task
+    - copywriting_task
+    - social_media_task
+  output_file: 'campaign_validation_report.md'
+
+final_campaign_report:
+  description: >
+    Compile all validated campaign materials into a comprehensive, presentation-ready report.
+    
+    Consolidate outputs from all agents into a cohesive final deliverable that includes:
+    
+    1. Campaign Overview (from planning)
+    2. Market Research Insights (key findings only)
+    3. Buyer Personas (visual/structured format)
+    4. SEO Keyword Strategy (implementation-ready)
+    5. Complete Amazon Listing Copy (ready to upload)
+    6. Social Media Campaign Playbook (ready to execute)
+    7. Quality Validation Summary (approval status)
+    8. Next Steps and Implementation Timeline
+    
+    Ensure the report is:
+    - Professionally formatted with clear sections
+    - Structured for executive presentation
+    - Actionable and implementation-ready
+    - Includes all necessary details without redundancy
+    - Formatted in clean Markdown with tables where appropriate
+    
+    This is the final deliverable that stakeholders will use to execute the campaign.
+  expected_output: >
+    A complete, professionally formatted Markdown report titled:
+    
+    # Amazon Product Launch Campaign Plan: {product_name}
+    ## {product_category} Category
+    
+    **Campaign Date:** {current_date}
+    **Prepared by:** Multi-Agent E-Commerce Marketing Team
+    
+    ---
+    
+    ## Executive Summary
+    [2-3 paragraph overview of campaign, objectives, and expected outcomes]
+    
+    ---
+    
+    ## Target Audience & Personas
+    [2-3 detailed buyer personas with demographics, pain points, motivations]
+    
+    ---
+    
+    ## Market Insights
+    [Key market research findings, competitive landscape, opportunities]
+    
+    ---
+    
+    ## SEO Strategy
+    
+    ### Primary Keywords
+    | Keyword | Search Volume | Competition | Placement |
+    |---------|---------------|-------------|-----------|
+    [Table of keywords]
+    
+    ### Keyword Integration Plan
+    [Where and how to use keywords]
+    
+    ---
+    
+    ## Amazon Listing Content
+    
+    ### Product Title
+    [Final approved title]
+    
+    ### Bullet Points
+    1. [Bullet 1]
+    2. [Bullet 2]
+    3. [Bullet 3]
+    4. [Bullet 4]
+    5. [Bullet 5]
+    
+    ### Product Description
+    [Complete description]
+    
+    ### Campaign Slogans
+    - [Slogan options]
+    
+    ---
+    
+    ## Social Media Campaign
+    
+    ### Facebook
+    [Ad copy and organic posts]
+    
+    ### Instagram  
+    [Captions, Stories, hashtags]
+    
+    ### TikTok
+    [Video concepts]
+    
+    ### Twitter
+    [Tweet sequence]
+    
+    ### Influencer Strategy
+    [Partnership guidelines]
+    
+    ---
+    
+    ## Quality Validation
+    **Status:** [APPROVED/PENDING]
+    **Key Recommendations:** [Summary of validator feedback]
+    
+    ---
+    
+    ## Implementation Timeline
+    
+    | Phase | Activities | Timeline |
+    |-------|-----------|----------|
+    | Pre-Launch | [Tasks] | [Dates] |
+    | Launch Week | [Tasks] | [Dates] |
+    | Post-Launch | [Tasks] | [Dates] |
+    
+    ---
+    
+    ## Success Metrics & KPIs
+    - Target Ranking: Top 10 in category within 30 days
+    - Review Goal: 50+ reviews (4.5★ average) in first month
+    - Conversion Rate Target: 15%+
+    - Social Engagement: [Platform-specific goals]
+    
+    ---
+    
+    **Campaign Status:** Ready for Implementation
+    **Next Steps:** [3-5 immediate action items]
+    
+    ---
+    
+    This report should be comprehensive, professional, and ready to present to stakeholders.
+  agent: lead_planner
+  context:
+    - planning_task
+    - market_research_task
+    - seo_research_task
+    - copywriting_task
+    - social_media_task
+    - validation_task
+  output_file: 'amazon_campaign_final_report.md'
+
