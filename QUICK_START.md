@@ -98,7 +98,7 @@ max_retry_limit=3,    # Retries on failures
 ### Problem: Test fails with "Model not found"
 **Solution**: Model name might have changed. Check available models:
 ```powershell
-& "D:/Practice Lab-AI-Agent/Programming Assignment/CrewAI-multi-agent/crewai-venv/Scripts/python.exe" -c "import google.generativeai as genai; genai.configure(api_key='AIzaSyBjSdu-XxpV7VFdHCG_LgWHENJtXPsmML0'); print([m.name for m in genai.list_models() if 'flash' in m.name.lower()][:5])"
+& "D:/Practice Lab-AI-Agent/Programming Assignment/CrewAI-multi-agent/crewai-venv/Scripts/python.exe" -c "import google.generativeai as genai; genai.configure(api_key=''); print([m.name for m in genai.list_models() if 'flash' in m.name.lower()][:5])"
 ```
 
 ### Problem: Still getting 503 errors after retries

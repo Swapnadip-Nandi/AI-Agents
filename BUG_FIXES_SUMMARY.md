@@ -39,7 +39,6 @@ Successfully debugged and fixed the CrewAI multi-agent e-commerce campaign syste
 # Changed from experimental to stable production model
 MODEL=gemini/gemini-2.0-flash-001  # ✓ Stable version
 FALLBACK_MODEL=gemini/gemini-2.0-flash  # ✓ Backup model
-GEMINI_API_KEY=AIzaSyBjSdu-XxpV7VFdHCG_LgWHENJtXPsmML0
 MAX_RETRIES=3
 RETRY_DELAY=5
 ```
