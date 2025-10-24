@@ -1,0 +1,37 @@
+# Tools Mapping for SEO Specialist Agent
+
+tools:
+  keyword_research_tool:
+    description: "Free keyword research and analysis"
+    capabilities:
+      - keyword_generation
+      - search_volume_estimation
+      - keyword_difficulty_analysis
+      - long_tail_discovery
+    
+  seo_analyzer:
+    description: "SEO content analysis and optimization"
+    capabilities:
+      - keyword_density_check
+      - content_scoring
+      - optimization_recommendations
+      - competitor_seo_analysis
+    
+  serp_tracker:
+    description: "Search engine results page tracking"
+    capabilities:
+      - ranking_monitoring
+      - serp_feature_analysis
+      - competitor_tracking
+      - visibility_scoring
+
+tool_usage_priority:
+  - keyword_research_tool
+  - seo_analyzer
+  - serp_tracker
+
+external_tools:
+  - keyword_research_tool  # Algorithmic keyword research
+
+custom_tools:
+  - calculator_tool  # For SEO metrics calculations

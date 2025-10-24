@@ -1,0 +1,173 @@
+# Workflow Configuration
+# Defines orchestration flow, task dependencies, and execution strategy
+
+workflow:
+  name: "Amazon Campaign Workflow"
+  version: "1.0.0"
+  description: "End-to-end campaign creation with parallel execution and validation"
+
+# Workflow Stages
+stages:
+  - id: "stage_1"
+    name: "Strategic Planning"
+    description: "Campaign objective definition and task breakdown"
+    agents:
+      - "lead_planner"
+    execution_mode: "sequential"
+    timeout_minutes: 5
+    retry_on_failure: true
+    max_retries: 2
+    
+  - id: "stage_2"
+    name: "Market Intelligence (Parallel)"
+    description: "Concurrent market research and SEO analysis"
+    agents:
+      - "market_research_analyst"
+      - "seo_specialist"
+    execution_mode: "parallel"
+    timeout_minutes: 10
+    retry_on_failure: true
+    max_retries: 2
+    depends_on:
+      - "stage_1"
+    
+  - id: "stage_3"
+    name: "Content Creation"
+    description: "Amazon listing and social media content generation"
+    agents:
+      - "copywriter"
+    execution_mode: "sequential"
+    timeout_minutes: 8
+    retry_on_failure: true
+    max_retries: 2
+    depends_on:
+      - "stage_2"
+    
+  - id: "stage_4"
+    name: "Social Media Campaign Design"
+    description: "Multi-platform social media strategy"
+    agents:
+      - "social_media_marketer"
+    execution_mode: "sequential"
+    timeout_minutes: 8
+    retry_on_failure: true
+    max_retries: 2
+    depends_on:
+      - "stage_3"
+    
+  - id: "stage_5"
+    name: "Quality Validation"
+    description: "Compliance checking and hallucination mitigation"
+    agents:
+      - "quality_validator"
+    execution_mode: "sequential"
+    timeout_minutes: 7
+    retry_on_failure: false  # Validation failures should be explicit
+    max_retries: 1
+    depends_on:
+      - "stage_3"
+      - "stage_4"
+
+# Execution Strategy
+execution:
+  strategy: "hybrid"  # sequential stages with parallel tasks within stages
+  enable_conditional_execution: true
+  enable_dynamic_routing: false
+  enable_human_in_the_loop: false
+  
+  # Parallel execution configuration
+  parallel:
+    max_concurrent: 3
+    merge_strategy: "wait_all"  # Options: wait_all, wait_any, race
+    error_handling: "continue_on_error"  # Options: continue_on_error, fail_fast
+    
+  # Sequential execution configuration
+  sequential:
+    stop_on_error: false
+    propagate_context: true
+    
+# Data Flow
+data_flow:
+  input_schema:
+    product_info:
+      - "product_name"
+      - "product_category"
+      - "product_features"
+      - "target_audience"
+      - "unique_selling_points"
+      - "price_point"
+      - "brand_name"
+    campaign_params:
+      - "campaign_goals"
+      - "budget"
+      - "timeline"
+      - "target_markets"
+      
+  output_schema:
+    campaign_plan: "from_lead_planner"
+    market_insights: "from_market_research_analyst"
+    keyword_strategy: "from_seo_specialist"
+    amazon_listing: "from_copywriter"
+    social_media_campaigns: "from_social_media_marketer"
+    validation_report: "from_quality_validator"
+    
+  context_propagation:
+    - from: "lead_planner"
+      to: ["market_research_analyst", "seo_specialist"]
+      fields: ["campaign_objectives", "target_audience", "product_info"]
+      
+    - from: "market_research_analyst"
+      to: ["copywriter", "social_media_marketer"]
+      fields: ["market_insights", "competitor_analysis", "market_trends"]
+      
+    - from: "seo_specialist"
+      to: ["copywriter"]
+      fields: ["primary_keywords", "secondary_keywords", "keyword_strategy"]
+      
+    - from: "copywriter"
+      to: ["quality_validator"]
+      fields: ["amazon_listing", "product_title", "bullet_points", "description"]
+      
+    - from: "social_media_marketer"
+      to: ["quality_validator"]
+      fields: ["social_campaigns", "content_calendar", "ad_copy"]
+
+# Monitoring and Checkpoints
+monitoring:
+  enable_checkpoints: true
+  checkpoint_frequency: "per_stage"
+  save_intermediate_outputs: true
+  
+  metrics:
+    - "execution_time"
+    - "token_usage"
+    - "api_calls"
+    - "error_count"
+    - "retry_count"
+    - "agent_performance"
+    
+# Error Handling Strategy
+error_handling:
+  default_strategy: "retry_with_fallback"
+  
+  stage_specific:
+    stage_1:
+      on_error: "retry"
+      max_retries: 3
+      fallback: "use_template"
+      
+    stage_2:
+      on_error: "partial_success"  # If one parallel task fails, continue with successful ones
+      max_retries: 2
+      
+    stage_5:
+      on_error: "fail_and_report"  # Validation failures should be explicit
+      max_retries: 1
+
+# Optimization Settings
+optimization:
+  enable_caching: true
+  cache_agent_outputs: true
+  deduplicate_tool_calls: true
+  optimize_context_window: true
+  enable_lazy_loading: false

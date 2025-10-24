@@ -1,0 +1,37 @@
+# Tools Mapping for Social Media Marketer Agent
+
+tools:
+  social_scheduler:
+    description: "Content scheduling and posting automation"
+    capabilities:
+      - content_calendar_management
+      - optimal_timing_detection
+      - cross_platform_posting
+      - scheduling_automation
+    
+  audience_analyzer:
+    description: "Social media audience analysis"
+    capabilities:
+      - demographic_analysis
+      - interest_targeting
+      - lookalike_audience_creation
+      - engagement_pattern_analysis
+    
+  creative_optimizer:
+    description: "Ad creative performance optimization"
+    capabilities:
+      - a_b_testing
+      - creative_scoring
+      - performance_prediction
+      - format_recommendations
+
+tool_usage_priority:
+  - audience_analyzer
+  - creative_optimizer
+  - social_scheduler
+
+external_tools: []
+
+custom_tools:
+  - calculator_tool  # For budget allocation and ROI calculations
+  - file_parser_tool  # For parsing brand assets and guidelines

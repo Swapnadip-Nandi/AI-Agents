@@ -1,0 +1,210 @@
+# Logging Configuration
+# Centralized logging settings for the multi-agent system
+
+logging:
+  version: 1
+  
+  # Global settings
+  enabled: true
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  
+  # Output destinations
+  handlers:
+    console:
+      enabled: true
+      level: "INFO"
+      format: "detailed"  # Options: simple, detailed, json
+      colorize: true
+      
+    file:
+      enabled: true
+      level: "DEBUG"
+      format: "detailed"
+      path: "./storage/logs"
+      
+      # File rotation
+      rotation:
+        enabled: true
+        max_size_mb: 10
+        max_files: 10
+        compress_old: true
+        
+      # File naming
+      naming:
+        pattern: "amazon_campaign_{timestamp}.log"
+        timestamp_format: "%Y%m%d_%H%M%S"
+        
+    error_file:
+      enabled: true
+      level: "ERROR"
+      format: "detailed"
+      path: "./storage/logs/errors"
+      separate_file: true
+      
+  # Log formats
+  formats:
+    simple: "{time} | {level} | {message}"
+    
+    detailed: "{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {name}:{function}:{line} | {message}"
+    
+    json: |
+      {
+        "timestamp": "{time:YYYY-MM-DD HH:mm:ss.SSS}",
+        "level": "{level}",
+        "logger": "{name}",
+        "function": "{function}",
+        "line": "{line}",
+        "message": "{message}",
+        "extra": "{extra}"
+      }
+      
+  # Component-specific logging
+  components:
+    agents:
+      level: "INFO"
+      include_prompts: false  # Set to true for debugging
+      include_responses: true
+      include_reasoning: true
+      log_tool_calls: true
+      
+    workflows:
+      level: "INFO"
+      log_stage_transitions: true
+      log_data_flow: true
+      log_parallel_execution: true
+      
+    tools:
+      level: "INFO"
+      log_api_calls: true
+      log_api_responses: false  # Can be verbose
+      log_tool_errors: true
+      
+    memory:
+      level: "INFO"
+      log_reads: false
+      log_writes: true
+      log_cache_hits: false
+      
+    validation:
+      level: "INFO"
+      log_checks: true
+      log_failures: true
+      log_warnings: true
+      
+  # Performance logging
+  performance:
+    enabled: true
+    log_execution_time: true
+    log_token_usage: true
+    log_api_latency: true
+    log_memory_usage: true
+    
+    # Thresholds for warnings
+    thresholds:
+      execution_time_seconds: 60
+      token_usage: 5000
+      api_latency_ms: 3000
+      memory_usage_mb: 500
+      
+  # Event logging
+  events:
+    enabled: true
+    
+    # Events to log
+    track:
+      - "workflow_started"
+      - "workflow_completed"
+      - "workflow_failed"
+      - "stage_started"
+      - "stage_completed"
+      - "agent_invoked"
+      - "agent_completed"
+      - "tool_called"
+      - "validation_performed"
+      - "error_occurred"
+      - "retry_attempted"
+      
+    # Event details
+    include_metadata: true
+    include_context: true
+    include_stack_trace_on_error: true
+    
+  # Structured logging
+  structured:
+    enabled: true
+    format: "json"
+    include_fields:
+      - "timestamp"
+      - "level"
+      - "component"
+      - "agent_id"
+      - "workflow_id"
+      - "stage_id"
+      - "message"
+      - "duration_ms"
+      - "token_count"
+      - "error_details"
+      
+  # Debug settings
+  debug:
+    enabled: false  # Set to true for detailed debugging
+    log_full_context: false
+    log_raw_llm_calls: false
+    log_memory_state: false
+    log_variable_values: false
+    
+  # Filtering
+  filters:
+    # Exclude sensitive information
+    exclude_patterns:
+      - "api_key"
+      - "token"
+      - "password"
+      - "secret"
+      
+    # Rate limiting for noisy logs
+    rate_limit:
+      enabled: true
+      max_per_minute: 100
+      
+  # Log aggregation
+  aggregation:
+    enabled: true
+    
+    # Summary statistics
+    summary:
+      enabled: true
+      frequency: "per_workflow"
+      include:
+        - "total_execution_time"
+        - "total_tokens_used"
+        - "total_api_calls"
+        - "error_count"
+        - "retry_count"
+        - "agent_performance_metrics"
+        
+  # External logging services (optional)
+  external:
+    # Cloud logging
+    cloud_logging:
+      enabled: false
+      service: "google_cloud_logging"
+      project_id: ""
+      
+    # Application monitoring
+    apm:
+      enabled: false
+      service: "datadog"
+      api_key: ""
+      
+  # Retention policy
+  retention:
+    default_days: 30
+    error_logs_days: 90
+    debug_logs_days: 7
+    
+  # Privacy and compliance
+  privacy:
+    anonymize_pii: true
+    redact_sensitive_data: true
+    include_user_data: false

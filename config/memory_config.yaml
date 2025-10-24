@@ -1,0 +1,191 @@
+# Memory Configuration
+# Settings for agent memory persistence and context management
+
+memory:
+  backend: "file"  # Options: file, memory, redis, postgres
+  enabled: true
+  
+  # File-based memory settings
+  file_backend:
+    storage_path: "./storage/memory"
+    format: "json"  # Options: json, pickle, yaml
+    compression: false
+    encryption: false
+    
+  # Memory types
+  types:
+    short_term:
+      enabled: true
+      retention: "session"  # Cleared after workflow completion
+      max_size_mb: 50
+      scope: "agent"  # Each agent has its own short-term memory
+      
+    long_term:
+      enabled: true
+      retention: "persistent"  # Saved across sessions
+      retention_days: 30
+      max_size_mb: 200
+      scope: "system"  # Shared across all agents
+      auto_summarize: true
+      summarize_threshold_mb: 100
+      
+    working:
+      enabled: true
+      retention: "task"  # Cleared after each task
+      max_size_mb: 20
+      scope: "agent"
+      
+    shared:
+      enabled: true
+      retention: "workflow"  # Cleared after workflow completion
+      max_size_mb: 100
+      scope: "global"  # Accessible by all agents
+      
+  # Context Management
+  context:
+    max_context_length: 8000  # tokens
+    context_compression: true
+    compression_strategy: "summarization"  # Options: summarization, truncation, smart_filtering
+    
+    # Context window optimization
+    prioritization:
+      - "recent_interactions"
+      - "task_relevant_data"
+      - "agent_specific_knowledge"
+      - "shared_campaign_context"
+      
+    # Context propagation rules
+    propagation:
+      lead_planner_to_all:
+        enabled: true
+        fields: ["campaign_objectives", "product_details", "target_audience"]
+        
+      research_to_creators:
+        enabled: true
+        fields: ["market_insights", "keywords", "competitor_data"]
+        
+      creators_to_validator:
+        enabled: true
+        fields: ["generated_content", "listing_data", "social_posts"]
+        
+  # Memory Structure per Agent
+  agent_memory:
+    lead_planner:
+      store:
+        - "campaign_plan"
+        - "task_breakdown"
+        - "objectives"
+        - "success_metrics"
+      share_with: ["all"]
+      
+    market_research_analyst:
+      store:
+        - "market_insights"
+        - "competitor_analysis"
+        - "market_trends"
+        - "target_audience_data"
+      share_with: ["copywriter", "social_media_marketer", "quality_validator"]
+      
+    seo_specialist:
+      store:
+        - "primary_keywords"
+        - "secondary_keywords"
+        - "keyword_metrics"
+        - "search_trends"
+      share_with: ["copywriter", "quality_validator"]
+      
+    copywriter:
+      store:
+        - "product_title"
+        - "bullet_points"
+        - "product_description"
+        - "backend_keywords"
+      share_with: ["social_media_marketer", "quality_validator"]
+      
+    social_media_marketer:
+      store:
+        - "social_campaigns"
+        - "content_calendar"
+        - "platform_strategies"
+        - "ad_copy"
+      share_with: ["quality_validator"]
+      
+    quality_validator:
+      store:
+        - "validation_results"
+        - "compliance_checks"
+        - "hallucination_flags"
+        - "quality_score"
+      share_with: ["all"]
+      
+  # Memory Persistence Strategy
+  persistence:
+    auto_save: true
+    save_frequency: "per_task"  # Options: per_task, per_stage, per_workflow, manual
+    
+    # Checkpoint management
+    checkpoints:
+      enabled: true
+      save_before_critical_tasks: true
+      save_after_validation: true
+      max_checkpoints: 10
+      
+    # Memory cleanup
+    cleanup:
+      auto_cleanup: true
+      cleanup_strategy: "age_based"  # Options: age_based, size_based, hybrid
+      cleanup_threshold_days: 30
+      compress_old_memories: true
+      compress_age_days: 7
+      
+  # Memory Retrieval
+  retrieval:
+    method: "semantic_search"  # Options: semantic_search, keyword_match, hybrid
+    max_results: 10
+    relevance_threshold: 0.7
+    include_metadata: true
+    
+    # Caching for faster retrieval
+    cache:
+      enabled: true
+      ttl_minutes: 30
+      max_cache_size_mb: 50
+      
+  # Cross-Workflow Memory
+  cross_workflow:
+    enabled: true
+    share_learnings: true
+    
+    # What to remember across workflows
+    persist:
+      - "successful_strategies"
+      - "keyword_performance"
+      - "content_templates"
+      - "validation_patterns"
+      
+    # What to forget
+    discard:
+      - "product_specific_data"
+      - "time_sensitive_insights"
+      - "temporary_working_data"
+
+# Advanced Features
+advanced:
+  # Semantic memory (for similarity-based retrieval)
+  semantic_memory:
+    enabled: false  # Requires embeddings
+    embedding_model: "text-embedding-004"
+    dimension: 768
+    similarity_threshold: 0.75
+    
+  # Memory consolidation
+  consolidation:
+    enabled: true
+    strategy: "periodic"  # Options: periodic, threshold_based, manual
+    consolidate_every_n_workflows: 5
+    
+  # Memory versioning
+  versioning:
+    enabled: true
+    max_versions: 3
+    track_changes: true

@@ -1,0 +1,118 @@
+name: Amazon Marketing Campaign Agency
+version: 1.0.0
+description: Multi-agent system for creating comprehensive Amazon product listings and social media campaigns
+
+# Environment configuration
+environment:
+  api_key: ${GOOGLE_API_KEY}
+  model: ${MODEL}
+  fallback_model: ${FALLBACK_MODEL}
+  max_retries: ${MAX_RETRIES}
+  retry_delay: ${RETRY_DELAY}
+
+# Define all agents in the agency
+agents:
+  - name: Lead Planner
+    type: orchestrator
+    directory: agents/lead_planner
+    config: agents/lead_planner/config.yaml
+    prompts: agents/lead_planner/prompts
+    tools_map: agents/lead_planner/tools_map.yaml
+    description: Strategic campaign architect that coordinates all agents
+    
+  - name: Market Research Analyst
+    type: researcher
+    directory: agents/market_research_analyst
+    config: agents/market_research_analyst/config.yaml
+    prompts: agents/market_research_analyst/prompts
+    tools_map: agents/market_research_analyst/tools_map.yaml
+    description: Competitive intelligence specialist
+    
+  - name: SEO Specialist
+    type: specialist
+    directory: agents/seo_specialist
+    config: agents/seo_specialist/config.yaml
+    prompts: agents/seo_specialist/prompts
+    tools_map: agents/seo_specialist/tools_map.yaml
+    description: Keyword optimization expert
+    
+  - name: Copywriter
+    type: creator
+    directory: agents/copywriter
+    config: agents/copywriter/config.yaml
+    prompts: agents/copywriter/prompts
+    tools_map: agents/copywriter/tools_map.yaml
+    description: Amazon listing content creator
+    
+  - name: Social Media Marketer
+    type: marketer
+    directory: agents/social_media_marketer
+    config: agents/social_media_marketer/config.yaml
+    prompts: agents/social_media_marketer/prompts
+    tools_map: agents/social_media_marketer/tools_map.yaml
+    description: Multi-platform campaign designer
+    
+  - name: Quality Validator
+    type: validator
+    directory: agents/quality_validator
+    config: agents/quality_validator/config.yaml
+    prompts: agents/quality_validator/prompts
+    tools_map: agents/quality_validator/tools_map.yaml
+    description: Compliance and quality assurance specialist
+
+# Define workflow execution order
+workflows:
+  - name: campaign_workflow
+    file: workflows/campaign_workflow.py
+    class: CampaignWorkflow
+    description: Main sequential campaign creation workflow
+    
+  - name: parallel_research_workflow
+    file: workflows/parallel_research_workflow.py
+    class: ParallelResearchWorkflow
+    description: Parallel market research and SEO analysis
+    
+  - name: validation_workflow
+    file: workflows/validation_workflow.py
+    class: ValidationWorkflow
+    description: Quality validation and compliance checking
+
+# Tools available to agents
+tools:
+  - name: web_search_tool
+    file: tools/web_search_tool.py
+    description: Search the web for market research
+    
+  - name: keyword_research_tool
+    file: tools/keyword_research_tool.py
+    description: Research keywords and search volumes
+    
+  - name: listing_generator_tool
+    file: tools/listing_generator_tool.py
+    description: Generate Amazon listing content
+    
+  - name: social_campaign_tool
+    file: tools/social_campaign_tool.py
+    description: Create social media campaign content
+    
+  - name: validation_tool
+    file: tools/validation_tool.py
+    description: Validate content for compliance
+    
+  - name: data_analytics_tool
+    file: tools/data_analytics_tool.py
+    description: Analyze market and performance data
+
+# Storage configuration
+storage:
+  memory: storage/memory
+  logs: storage/logs
+  outputs: storage/outputs
+  cache: storage/cache
+
+# Web interface settings
+web:
+  port: 8000
+  host: localhost
+  debug: true
+  auto_reload: true
