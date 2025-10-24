@@ -1,0 +1,344 @@
+# Validator Rules Configuration
+# Comprehensive validation rules for hallucination mitigation and compliance checking
+
+validation:
+  enabled: true
+  strict_mode: false  # Set to true for maximum compliance
+  
+  # Hallucination Detection Rules
+  hallucination_detection:
+    enabled: true
+    
+    # Factual consistency checks
+    factual_consistency:
+      enabled: true
+      
+      checks:
+        - name: "product_attribute_consistency"
+          description: "Ensure product attributes match across all content"
+          severity: "high"
+          method: "cross_reference"
+          
+        - name: "claim_verification"
+          description: "Verify all product claims have supporting evidence"
+          severity: "high"
+          method: "evidence_check"
+          
+        - name: "numerical_accuracy"
+          description: "Validate all numbers and statistics"
+          severity: "high"
+          method: "fact_check"
+          
+        - name: "temporal_consistency"
+          description: "Check date and time references are accurate"
+          severity: "medium"
+          method: "timestamp_validation"
+          
+    # Self-consistency checks
+    self_consistency:
+      enabled: true
+      
+      checks:
+        - name: "multi_generation_comparison"
+          description: "Compare multiple generations for consistency"
+          severity: "medium"
+          method: "similarity_check"
+          threshold: 0.85
+          
+        - name: "internal_contradiction_check"
+          description: "Detect contradictions within content"
+          severity: "high"
+          method: "logic_analysis"
+          
+    # Source grounding
+    source_grounding:
+      enabled: true
+      require_citations: false
+      
+      checks:
+        - name: "source_attribution"
+          description: "Ensure claims are grounded in provided sources"
+          severity: "medium"
+          method: "source_matching"
+          
+        - name: "verifiable_facts"
+          description: "All facts must be verifiable through web search"
+          severity: "medium"
+          method: "web_verification"
+          
+  # Amazon TOS Compliance Rules
+  amazon_compliance:
+    enabled: true
+    
+    # Content policy checks
+    content_policy:
+      enabled: true
+      
+      prohibited_content:
+        - category: "medical_claims"
+          description: "Unsubstantiated health or medical claims"
+          severity: "critical"
+          patterns:
+            - "cure"
+            - "treat disease"
+            - "FDA approved"  # Unless actually true
+            - "clinically proven"  # Without proof
+          
+        - category: "false_comparisons"
+          description: "False or misleading competitor comparisons"
+          severity: "high"
+          patterns:
+            - "better than all"
+            - "only product that"
+            - "guaranteed to"
+          
+        - category: "superlatives_without_proof"
+          description: "Unsubstantiated superlative claims"
+          severity: "medium"
+          patterns:
+            - "best in the world"
+            - "number one"
+            - "#1"  # Without verification
+            - "fastest"
+            - "most effective"
+          
+        - category: "time_sensitive_info"
+          description: "Time-sensitive information in listings"
+          severity: "medium"
+          patterns:
+            - "new for 2024"
+            - "limited time"
+            - "while supplies last"
+            - "sale ends"
+          
+        - category: "promotional_language"
+          description: "Promotional content not allowed in listings"
+          severity: "medium"
+          patterns:
+            - "free shipping"
+            - "discount"
+            - "% off"
+            - "sale price"
+            - "buy now"
+          
+        - category: "external_links"
+          description: "Links to external websites"
+          severity: "critical"
+          patterns:
+            - "http://"
+            - "https://"
+            - "www."
+            - ".com"
+            - "visit our website"
+          
+        - category: "contact_information"
+          description: "Seller contact information in listings"
+          severity: "high"
+          patterns:
+            - "email"
+            - "phone"
+            - "contact us"
+            - "@"  # Email addresses
+          
+    # Character limits
+    character_limits:
+      enabled: true
+      enforce: "warn"  # Options: strict, warn, ignore
+      
+      limits:
+        product_title:
+          max: 200
+          recommended: 150
+          
+        bullet_points:
+          max_per_bullet: 500
+          max_total: 5
+          recommended_per_bullet: 200
+          
+        product_description:
+          max: 2000
+          recommended: 1000
+          
+        search_terms:
+          max: 250
+          recommended: 200
+          
+    # Keyword restrictions
+    keyword_restrictions:
+      enabled: true
+      
+      prohibited_keywords:
+        - "Amazon"
+        - "Prime"
+        - "Alexa"  # Unless official Amazon product
+        - "Best Seller"
+        - "Amazon's Choice"
+        
+    # Image requirements (for reference)
+    image_guidelines:
+      enabled: true
+      
+      requirements:
+        - "Main image must have pure white background"
+        - "Product must fill 85% of image area"
+        - "No text or graphics on main image"
+        - "Minimum 1000px on longest side"
+        - "Images must be in focus"
+        
+  # Content Quality Checks
+  quality_checks:
+    enabled: true
+    
+    grammar_and_spelling:
+      enabled: true
+      severity: "medium"
+      auto_correct: false
+      
+    readability:
+      enabled: true
+      severity: "low"
+      target_reading_level: 8  # Grade level
+      
+    keyword_stuffing:
+      enabled: true
+      severity: "high"
+      max_keyword_density: 0.03  # 3%
+      
+    duplicate_content:
+      enabled: true
+      severity: "medium"
+      similarity_threshold: 0.9
+      
+    professionalism:
+      enabled: true
+      severity: "medium"
+      
+      checks:
+        - "No all-caps text"
+        - "No excessive punctuation (!!!, ???)"
+        - "No emojis in product titles"
+        - "Proper capitalization"
+        
+  # Brand Safety
+  brand_safety:
+    enabled: true
+    
+    checks:
+      - name: "trademark_violation"
+        description: "Detect potential trademark violations"
+        severity: "critical"
+        method: "keyword_matching"
+        
+      - name: "brand_name_misuse"
+        description: "Ensure brand name used correctly"
+        severity: "high"
+        method: "consistency_check"
+        
+      - name: "competitor_mentions"
+        description: "Detect inappropriate competitor mentions"
+        severity: "medium"
+        method: "keyword_matching"
+        
+  # SEO Best Practices
+  seo_validation:
+    enabled: true
+    
+    checks:
+      - name: "keyword_placement"
+        description: "Primary keyword in title and first bullet"
+        severity: "medium"
+        
+      - name: "keyword_variety"
+        description: "Use of related keywords and synonyms"
+        severity: "low"
+        
+      - name: "feature_focus"
+        description: "Clear product features in bullets"
+        severity: "medium"
+        
+  # Social Media Compliance
+  social_media_compliance:
+    enabled: true
+    
+    platform_rules:
+      facebook:
+        - "No misleading claims"
+        - "Required disclosures for health/finance"
+        - "Image text < 20% of area"
+        
+      instagram:
+        - "Proper hashtag usage"
+        - "FTC disclosure for sponsored content"
+        - "No prohibited content"
+        
+      tiktok:
+        - "Age-appropriate content"
+        - "Clear sponsored content labels"
+        - "Community guidelines compliance"
+        
+      pinterest:
+        - "No spam or misleading pins"
+        - "Proper affiliate disclosures"
+        - "High-quality images"
+        
+  # Validation Workflow
+  workflow:
+    # Multi-pass validation
+    passes:
+      - pass: 1
+        name: "Critical compliance"
+        checks: ["prohibited_content", "character_limits", "trademark_violation"]
+        fail_on_error: true
+        
+      - pass: 2
+        name: "Quality and accuracy"
+        checks: ["hallucination_detection", "factual_consistency", "quality_checks"]
+        fail_on_error: false
+        
+      - pass: 3
+        name: "Optimization"
+        checks: ["seo_validation", "readability"]
+        fail_on_error: false
+        
+    # Validation scoring
+    scoring:
+      enabled: true
+      
+      weights:
+        critical_violations: -100
+        high_severity: -50
+        medium_severity: -25
+        low_severity: -10
+        
+      thresholds:
+        fail: 0
+        warn: 50
+        pass: 75
+        excellent: 90
+        
+  # Reporting
+  reporting:
+    enabled: true
+    detailed: true
+    
+    include:
+      - "violations_by_severity"
+      - "compliance_score"
+      - "recommended_fixes"
+      - "validation_timestamp"
+      
+    format: "structured"  # Options: structured, narrative, both
+    
+  # Auto-remediation
+  auto_remediation:
+    enabled: false  # Set to true to auto-fix issues
+    
+    fixes:
+      - issue: "character_limit_exceeded"
+        action: "truncate_and_notify"
+        
+      - issue: "prohibited_keyword"
+        action: "remove_and_replace"
+        
+      - issue: "spelling_error"
+        action: "auto_correct"

@@ -1,0 +1,82 @@
+# Global ADK Configuration
+# System-wide settings for the multi-agent Amazon campaign system
+
+system:
+  name: "Amazon Campaign Multi-Agent System"
+  version: "1.0.0"
+  description: "Production-grade multi-agent system for Amazon marketing campaigns"
+
+# LLM Configuration
+llm:
+  provider: "google_genai"
+  primary_model: "${MODEL}"  # From .env
+  fallback_model: "${FALLBACK_MODEL}"  # From .env
+  api_key: "${GEMINI_API_KEY}"  # From .env
+  
+  # Generation parameters
+  temperature: 0.7
+  max_tokens: 8192
+  top_p: 0.9
+  top_k: 40
+  
+  # Safety settings
+  safety_settings:
+    harassment: "BLOCK_MEDIUM_AND_ABOVE"
+    hate_speech: "BLOCK_MEDIUM_AND_ABOVE"
+    sexually_explicit: "BLOCK_MEDIUM_AND_ABOVE"
+    dangerous_content: "BLOCK_MEDIUM_AND_ABOVE"
+  
+  # Rate limiting
+  rate_limit:
+    max_retries: 3
+    retry_delay: 20
+    exponential_backoff: true
+    max_concurrent_requests: 5
+
+# Agent Runtime Configuration
+agent_runtime:
+  enable_memory: true
+  memory_persistence: "file"  # Options: file, memory, database
+  enable_streaming: false
+  enable_function_calling: true
+  timeout_seconds: 300
+  
+# Execution Configuration
+execution:
+  mode: "sequential_with_parallel"  # hybrid approach
+  enable_parallel: true
+  max_parallel_agents: 3
+  enable_retry_failed_tasks: true
+  max_task_retries: 2
+  
+# Monitoring Configuration
+monitoring:
+  enable_logging: true
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  enable_event_tracking: true
+  enable_performance_metrics: true
+  enable_token_tracking: true
+  
+# Output Configuration
+output:
+  formats:
+    - "json"
+    - "markdown"
+  save_intermediate_results: true
+  pretty_print: true
+  include_metadata: true
+  include_agent_reasoning: true
+  
+# Cache Configuration
+cache:
+  enable: true
+  backend: "file"
+  ttl_hours: 24
+  max_size_mb: 500
+  
+# Error Handling
+error_handling:
+  enable_graceful_degradation: true
+  fallback_to_simple_mode: false
+  log_full_traceback: true
+  notify_on_critical_errors: true

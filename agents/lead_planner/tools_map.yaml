@@ -1,0 +1,37 @@
+# Tools Mapping for Lead Planner Agent
+
+tools:
+  planning_tools:
+    description: "Strategic planning and analysis tools"
+    capabilities:
+      - product_assessment
+      - market_sizing
+      - timeline_creation
+      - objective_definition
+    
+  coordination_system:
+    description: "Agent coordination and workflow management"
+    capabilities:
+      - agent_delegation
+      - dependency_tracking
+      - progress_monitoring
+      - workflow_optimization
+    
+  data_analytics:
+    description: "Data analysis for strategic insights"
+    capabilities:
+      - trend_analysis
+      - competitive_benchmarking
+      - performance_prediction
+      - risk_assessment
+
+tool_usage_priority:
+  - planning_tools
+  - data_analytics
+  - coordination_system
+
+external_tools: []
+
+custom_tools:
+  - calculator_tool  # For ROI calculations
+  - file_parser_tool  # For parsing product data files

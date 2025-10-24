@@ -1,0 +1,37 @@
+# Tools Mapping for Copywriter Agent
+
+tools:
+  listing_parser:
+    description: "Amazon listing validation and parsing"
+    capabilities:
+      - character_limit_checking
+      - format_validation
+      - compliance_verification
+      - readability_scoring
+    
+  content_generator:
+    description: "AI-powered content generation tools"
+    capabilities:
+      - headline_generation
+      - bullet_point_creation
+      - description_writing
+      - a_plus_content_design
+    
+  tone_analyzer:
+    description: "Content tone and style analysis"
+    capabilities:
+      - tone_consistency_check
+      - readability_analysis
+      - emotional_impact_scoring
+      - brand_voice_alignment
+
+tool_usage_priority:
+  - content_generator
+  - listing_parser
+  - tone_analyzer
+
+external_tools: []
+
+custom_tools:
+  - amazon_listing_parser  # Validates Amazon listing format
+  - file_parser_tool  # For parsing brand guidelines

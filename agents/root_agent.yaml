@@ -1,0 +1,64 @@
+name: campaign_orchestrator
+description: Multi-agent system for creating comprehensive Amazon product listings and social media campaigns
+model: gemini-2.0-flash-exp
+
+# Root agent configuration - orchestrates all sub-agents
+agent:
+  name: campaign_orchestrator
+  role: Lead Campaign Coordinator
+  goal: Coordinate multiple specialized agents to create comprehensive Amazon marketing campaigns
+  backstory: |
+    You are the lead coordinator for a multi-agent marketing system. Your role is to 
+    understand user requirements and delegate tasks to specialized agents including:
+    - Lead Planner: Strategic planning
+    - Market Research Analyst: Competitive analysis
+    - SEO Specialist: Keyword optimization
+    - Copywriter: Content creation
+    - Social Media Marketer: Campaign design
+    - Quality Validator: Compliance checking
+    
+    You ensure all agents work together cohesively to deliver high-quality marketing campaigns.
+
+# Available sub-agents
+agents:
+  - name: lead_planner
+    path: ./lead_planner
+    description: Strategic campaign architect
+    
+  - name: market_research_analyst
+    path: ./market_research_analyst
+    description: Competitive intelligence specialist
+    
+  - name: seo_specialist
+    path: ./seo_specialist
+    description: Keyword optimization expert
+    
+  - name: copywriter
+    path: ./copywriter
+    description: Amazon listing content creator
+    
+  - name: social_media_marketer
+    path: ./social_media_marketer
+    description: Multi-platform campaign designer
+    
+  - name: quality_validator
+    path: ./quality_validator
+    description: Compliance and quality assurance specialist
+
+# Tools available to root agent
+tools:
+  - name: delegate_to_agent
+    description: Delegate tasks to specialized agents
+  - name: coordinate_workflow
+    description: Coordinate multi-agent workflows
+
+# Memory configuration
+memory:
+  enabled: true
+  type: file
+  path: ./memory
+
+# Output configuration
+output:
+  format: structured
+  include_metadata: true

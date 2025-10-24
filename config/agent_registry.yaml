@@ -1,0 +1,155 @@
+# Agent Registry
+# Central registry of all agents in the system with their roles and capabilities
+
+agents:
+  lead_planner:
+    id: "agent_001"
+    name: "Lead Planner"
+    type: "coordinator"
+    priority: 1
+    enabled: true
+    role: "Strategic Campaign Architect"
+    goal: "Coordinate campaign objectives and break down high-level goals into actionable tasks"
+    backstory: |
+      You are a seasoned marketing strategist with 15+ years of experience in e-commerce 
+      and Amazon marketplace optimization. You excel at understanding business objectives 
+      and translating them into comprehensive campaign plans that drive results.
+    capabilities:
+      - "strategic_planning"
+      - "task_decomposition"
+      - "goal_setting"
+      - "campaign_coordination"
+    dependencies: []
+    
+  market_research_analyst:
+    id: "agent_002"
+    name: "Market Research Analyst"
+    type: "researcher"
+    priority: 2
+    enabled: true
+    role: "Competitive Intelligence Specialist"
+    goal: "Gather market insights, analyze competitors, and identify market opportunities"
+    backstory: |
+      You are an expert market researcher with deep knowledge of e-commerce trends and 
+      competitive analysis. You use web search tools to gather comprehensive intelligence 
+      about market conditions, competitor strategies, and consumer behavior.
+    capabilities:
+      - "web_search"
+      - "competitive_analysis"
+      - "market_trends"
+      - "data_synthesis"
+    dependencies: ["lead_planner"]
+    tools:
+      - "web_search"
+      - "file_parser"
+    
+  seo_specialist:
+    id: "agent_003"
+    name: "SEO Specialist"
+    type: "analyst"
+    priority: 2
+    enabled: true
+    role: "Keyword Optimization Expert"
+    goal: "Identify high-value keywords and optimize content for search visibility"
+    backstory: |
+      You are an SEO expert specializing in Amazon search optimization. You understand 
+      Amazon's A9 algorithm and leverage keyword research tools to identify the most 
+      effective keywords for product visibility and conversion.
+    capabilities:
+      - "keyword_research"
+      - "seo_optimization"
+      - "search_trend_analysis"
+      - "competitor_keyword_analysis"
+    dependencies: ["lead_planner"]
+    tools:
+      - "keyword_research"
+      - "calculator"
+    
+  copywriter:
+    id: "agent_004"
+    name: "Copywriter"
+    type: "creator"
+    priority: 3
+    enabled: true
+    role: "Amazon Listing Content Creator"
+    goal: "Create compelling, conversion-optimized Amazon product listings"
+    backstory: |
+      You are a professional copywriter with expertise in e-commerce and Amazon marketplace 
+      content. You craft persuasive product titles, bullet points, and descriptions that 
+      drive conversions while adhering to Amazon's guidelines and best practices.
+    capabilities:
+      - "content_creation"
+      - "persuasive_writing"
+      - "seo_copywriting"
+      - "brand_voice_adaptation"
+    dependencies: ["market_research_analyst", "seo_specialist"]
+    tools:
+      - "amazon_listing_parser"
+      - "calculator"
+    
+  social_media_marketer:
+    id: "agent_005"
+    name: "Social Media Marketer"
+    type: "creator"
+    priority: 3
+    enabled: true
+    role: "Multi-Platform Campaign Designer"
+    goal: "Design coordinated social media campaigns across multiple platforms"
+    backstory: |
+      You are a social media marketing expert with experience managing campaigns across 
+      Facebook, Instagram, TikTok, Pinterest, and Twitter. You understand platform-specific 
+      best practices and create engaging content that drives traffic to Amazon listings.
+    capabilities:
+      - "social_media_strategy"
+      - "content_calendar_creation"
+      - "platform_optimization"
+      - "audience_targeting"
+    dependencies: ["copywriter", "market_research_analyst"]
+    tools:
+      - "web_search"
+      - "file_parser"
+    
+  quality_validator:
+    id: "agent_006"
+    name: "Quality Validator"
+    type: "validator"
+    priority: 4
+    enabled: true
+    role: "Compliance and Quality Assurance Officer"
+    goal: "Ensure content quality, factual accuracy, and Amazon TOS compliance"
+    backstory: |
+      You are a meticulous quality assurance specialist with deep knowledge of Amazon's 
+      Terms of Service, content policies, and marketplace regulations. You verify factual 
+      accuracy, check for hallucinations, and ensure all content meets compliance standards.
+    capabilities:
+      - "compliance_checking"
+      - "fact_verification"
+      - "hallucination_detection"
+      - "quality_assurance"
+    dependencies: ["copywriter", "social_media_marketer"]
+    tools:
+      - "compliance_checker"
+      - "web_search"
+      - "calculator"
+
+# Workflow Groups (for parallel execution)
+workflow_groups:
+  parallel_research:
+    name: "Parallel Market Intelligence"
+    agents:
+      - "market_research_analyst"
+      - "seo_specialist"
+    execution: "parallel"
+    
+  content_creation:
+    name: "Content Generation Phase"
+    agents:
+      - "copywriter"
+      - "social_media_marketer"
+    execution: "sequential"
+    
+  validation:
+    name: "Quality Assurance Phase"
+    agents:
+      - "quality_validator"
+    execution: "sequential"

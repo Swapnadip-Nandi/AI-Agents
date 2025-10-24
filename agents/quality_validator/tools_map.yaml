@@ -1,0 +1,38 @@
+# Tools Mapping for Quality Validator Agent
+
+tools:
+  compliance_checker:
+    description: "Amazon TOS and policy compliance validation"
+    capabilities:
+      - tos_violation_detection
+      - prohibited_content_check
+      - claim_verification
+      - brand_safety_assessment
+    
+  hallucination_guard:
+    description: "AI hallucination and false claim detection"
+    capabilities:
+      - consistency_checking
+      - factual_accuracy_verification
+      - source_validation
+      - confidence_scoring
+    
+  fact_verifier:
+    description: "Web-based fact verification"
+    capabilities:
+      - claim_fact_checking
+      - source_validation
+      - expert_consensus_checking
+      - citation_verification
+
+tool_usage_priority:
+  - compliance_checker
+  - hallucination_guard
+  - fact_verifier
+
+external_tools:
+  - web_search_tool  # For fact verification
+
+custom_tools:
+  - compliance_checker  # Amazon TOS validation
+  - file_parser_tool  # For parsing validation rules

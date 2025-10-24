@@ -1,0 +1,38 @@
+# Tools Mapping for Market Research Analyst Agent
+
+tools:
+  web_search_tool:
+    description: "DuckDuckGo web search for market intelligence"
+    capabilities:
+      - competitor_search
+      - trend_discovery
+      - news_monitoring
+      - fact_verification
+    
+  data_analytics:
+    description: "Data analysis and insights generation"
+    capabilities:
+      - trend_analysis
+      - pattern_recognition
+      - market_sizing
+      - forecasting
+    
+  competitor_tracker:
+    description: "Competitor monitoring and analysis"
+    capabilities:
+      - price_tracking
+      - feature_comparison
+      - review_analysis
+      - positioning_assessment
+
+tool_usage_priority:
+  - web_search_tool
+  - data_analytics
+  - competitor_tracker
+
+external_tools:
+  - web_search_tool  # DuckDuckGo integration
+
+custom_tools:
+  - calculator_tool  # For market calculations
+  - file_parser_tool  # For parsing market data files
