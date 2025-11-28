@@ -1,0 +1,52 @@
+problem_definition:
+  description: >
+    Analyze the user query: "{user_query}"
+    
+    Create a comprehensive problem statement that includes:
+    1. Clear problem description
+    2. Input/output specifications
+    3. Constraints and requirements
+    4. Expected behavior
+    5. Any edge cases to consider
+    
+    Make the problem statement specific and actionable for a developer to implement.
+  expected_output: "A detailed problem statement with clear requirements and specifications"
+  agent: problem_setter
+
+code_implementation:
+  description: >
+    Based on the problem statement from the Problem Setter, implement a complete Python solution.
+    
+    Requirements:
+    1. Write clean, readable Python code
+    2. Include proper documentation and comments
+    3. Follow PEP 8 coding standards
+    4. Include error handling where appropriate
+    5. Add example usage/test cases
+    6. Save the solution to 'solution.py'
+    
+    The code should be production-ready and well-structured.
+  expected_output: "Complete Python code solution saved to solution.py with documentation and examples"
+  agent: coder
+  context:
+    - problem_definition
+
+code_review:
+  description: >
+    Review the generated Python code and provide comprehensive feedback.
+    
+    Evaluate the code for:
+    1. Correctness and functionality
+    2. Code readability and style
+    3. Performance and optimization opportunities
+    4. Error handling and edge cases
+    5. Documentation quality
+    6. Best practices adherence
+    
+    Provide specific recommendations for improvement and rate the overall code quality.
+    Save your detailed review to 'review.txt'.
+  expected_output: "Detailed code review with specific feedback and recommendations saved to review.txt"
+  agent: reviewer
+  context:
+    - problem_definition
+    - code_implementation

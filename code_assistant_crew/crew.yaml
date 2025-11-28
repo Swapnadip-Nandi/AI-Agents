@@ -1,0 +1,4 @@
+agents_config: "agents.yaml"
+tasks_config: "tasks.yaml"
+process: "sequential"
+verbose: true

@@ -1,0 +1,46 @@
+research_task:
+  description: >
+    Conduct a thorough research about {topic}
+    Make sure you find any interesting and relevant information given
+    the current year is {current_year}.
+  expected_output: >
+    A list with 10 bullet points of the most relevant information about {topic}
+  agent: researcher
+
+reporting_task:
+  description: >
+    Review the context you got and expand each topic into a full section for a report.
+    Make sure the report is detailed and contains any and all relevant information.
+  expected_output: >
+    A fully fledged report with the main topics, each with a full section of information.
+    Formatted as markdown without '```'
+  agent: reporting_analyst
+
+search_papers:
+  description: Search for recent technical papers on the input topic.
+  expected_output: List of 5–7 relevant research papers with links.
+  agent: searcher_agent
+validate_papers:
+  description: Validate that the selected papers are from credible sources.
+  expected_output: Filtered list of credible papers.
+  agent: validator_agent
+summarize_papers:
+  description: Summarize each credible paper in 2–3 sentences.
+  expected_output: Short summaries for each paper.
+  agent: summarizer_agent
+extract_insights:
+  description: Identify 3–5 key insights, common themes, and research gaps.
+  expected_output: List of insights and gaps.
+  agent: insight_extractor_agent
+create_outline:
+  description: Create a logical outline for the digest article.
+  expected_output: Article outline with sections and bullet points.
+  agent: outline_creator_agent
+write_draft:
+  description: Write a 600–800 word draft based on the outline and insights.
+  expected_output: Draft article in markdown format.
+  agent: writer_agent
+proofread_article:
+  description: Review and proofread the draft for clarity, flow, and correctness.
+  expected_output: Final, polished article.
+  agent: proofreader_agent

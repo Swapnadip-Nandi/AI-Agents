@@ -1,0 +1,59 @@
+destination_selection:
+  description: >
+    Based on the user's preferences:
+    - Preferred region/destination: "{region}"
+    - Type of trip: "{trip_type}"
+    
+    Suggest 3-5 top destinations that match these criteria. For each destination, provide:
+    1. Brief description and why it fits the criteria
+    2. Best time to visit
+    3. Key highlights and attractions
+    4. Suitability for the specified trip type
+    5. Any special considerations
+    
+    Focus on destinations that offer the best value and experience for the specified trip type.
+  expected_output: "List of 3-5 recommended destinations with detailed explanations for each"
+  agent: destination_expert
+
+itinerary_planning:
+  description: >
+    Create a comprehensive 5-day travel itinerary for the recommended destination(s).
+    
+    Include for each day:
+    1. Morning, afternoon, and evening activities
+    2. Recommended restaurants and local food experiences
+    3. Cultural experiences and must-see attractions
+    4. Transportation between locations
+    5. Estimated time for each activity
+    6. Alternative options for different weather conditions
+    
+    Ensure the itinerary balances planned activities with free time and matches the trip type.
+  expected_output: "Detailed 5-day itinerary with activities, dining, and cultural experiences"
+  agent: itinerary_planner
+  context:
+    - destination_selection
+
+budget_planning:
+  description: >
+    Create a comprehensive budget breakdown for the travel plan.
+    
+    Provide detailed cost estimates for:
+    1. Accommodation (per night and total)
+    2. Transportation (flights, local transport)
+    3. Food and dining (breakfast, lunch, dinner, snacks)
+    4. Activities and attractions (entry fees, tours)
+    5. Shopping and miscellaneous expenses
+    6. Emergency fund recommendation
+    
+    Include:
+    - Daily budget breakdown
+    - Total trip cost estimate
+    - Money-saving tips specific to the destination
+    - Payment methods and currency information
+    
+    Save the complete travel plan and budget to 'trip_plan.txt'.
+  expected_output: "Complete budget breakdown with cost estimates and money-saving tips saved to trip_plan.txt"
+  agent: budget_advisor
+  context:
+    - destination_selection
+    - itinerary_planning
