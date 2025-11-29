@@ -1,0 +1,125 @@
+{
+  "session_id": "finwise-demo-session",
+  "state": {
+    "session_id": "finwise-demo-session",
+    "current_agent": "mock_data_generator",
+    "research_output": {
+      "query": "Apple Inc (AAPL) financial analysis",
+      "sources": [
+        {
+          "name": "Financial Times",
+          "url": "https://ft.com/aapl"
+        },
+        {
+          "name": "Bloomberg",
+          "url": "https://bloomberg.com/aapl"
+        },
+        {
+          "name": "Reuters",
+          "url": "https://reuters.com/aapl"
+        }
+      ],
+      "key_findings": [
+        "AAPL trading at $195.50, up 2.3% with strong momentum",
+        "Q4 2024 revenue of $94.9B represents 8% YoY growth",
+        "Services revenue at $22.3B (record high), growing 16% annually",
+        "iPhone 15 sales momentum continuing into Q1 2025",
+        "AI integration announced for iOS 18.5 'Apple Intelligence'",
+        "Goldman Sachs raised price target to $220 (Buy rating)"
+      ],
+      "metrics": [
+        {
+          "name": "Current Price",
+          "value": "$195.50",
+          "unit": "USD",
+          "change_percentage": 2.3
+        },
+        {
+          "name": "Market Cap",
+          "value": "$3.01T",
+          "unit": "USD",
+          "change_percentage": null
+        },
+        {
+          "name": "Revenue",
+          "value": "$94.9B",
+          "unit": "USD",
+          "change_percentage": 8.0
+        },
+        {
+          "name": "EPS",
+          "value": "$1.64",
+          "unit": "USD",
+          "change_percentage": null
+        },
+        {
+          "name": "P/E Ratio",
+          "value": "31.2",
+          "unit": null,
+          "change_percentage": null
+        },
+        {
+          "name": "Services Revenue",
+          "value": "$22.3B",
+          "unit": "USD",
+          "change_percentage": 16.0
+        }
+      ],
+      "timestamp": "2025-11-26T14:11:19.983830"
+    },
+    "analysis_output": {
+      "company_name": "Apple Inc. (AAPL)",
+      "market_segment": "Technology - Consumer Electronics",
+      "sentiment": "bullish",
+      "risk_level": "medium",
+      "insights": [
+        {
+          "category": "Valuation",
+          "description": "Trading at P/E of 31.2x, justified by strong brand moat and high-margin services business",
+          "confidence": 0.85,
+          "impact": "Positive - Strong fundamentals support current valuation"
+        },
+        {
+          "category": "Growth",
+          "description": "Services revenue growing 16% annually, approaching $100B with high margins",
+          "confidence": 0.9,
+          "impact": "Highly Positive - Recurring revenue stream strengthening"
+        },
+        {
+          "category": "Innovation",
+          "description": "AI integration in iOS 18.5 expected to drive upgrade supercycle in 2025",
+          "confidence": 0.75,
+          "impact": "Positive - New product catalyst identified"
+        },
+        {
+          "category": "Market Position",
+          "description": "#1 US smartphone manufacturer with 52% market share and strong ecosystem lock-in",
+          "confidence": 0.95,
+          "impact": "Highly Positive - Dominant market position"
+        },
+        {
+          "category": "Risk",
+          "description": "China exposure (~20% revenue) presents geopolitical risks",
+          "confidence": 0.7,
+          "impact": "Negative - Geographic concentration risk"
+        }
+      ],
+      "recommendations": [
+        "STRONG BUY - Initiate or add to position at current levels ($195.50)",
+        "Target Price: $215.00 (10% upside potential over 12-18 months)",
+        "Accumulate on dips below $190 for better entry point",
+        "Set stop loss at $180 (7.9% downside protection)",
+        "Target allocation: 5-8% of technology portfolio",
+        "Monitor Q1 2025 earnings for AI feature adoption metrics",
+        "Watch China sales trends and India market expansion"
+      ],
+      "score": 82.5,
+      "analyzed_at": "2025-11-26T14:11:19.983846"
+    },
+    "final_report": null,
+    "metadata": {},
+    "created_at": "2025-11-26T02:12:12.393856",
+    "updated_at": "2025-11-26T14:11:19.985184"
+  },
+  "updated_at": "2025-11-26T14:11:19.985234"
+}
